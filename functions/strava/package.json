@@ -1,0 +1,19 @@
+{
+  "name": "strava",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "azure-iot-common": "^1.7.1",
+    "azure-iothub": "^1.7.1",
+    "dayjs": "^1.7.4",
+    "lodash": "^4.17.10",
+    "strava": "^0.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
