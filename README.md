@@ -57,6 +57,7 @@ For the esp I used [platformio](https://platformio.org/) to write the code in vs
 
 ## Improvements
 
+- Add an off period at night
 - Better clasp to hold the device together and wall mounting system 
 - Darker plastic so LED light doesn't bleed
 - More LEDS for the Running text
