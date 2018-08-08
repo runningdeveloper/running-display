@@ -87,19 +87,19 @@ module.exports = (context, req) => {
                 blankLedArray[6] = colorConvert('today');
                 break;
             case 3: // wed
-                blankLedArray[8] = colorConvert('today');
-                break;
-            case 4: // thu
                 blankLedArray[9] = colorConvert('today');
                 break;
-            case 5: // fri
+            case 4: // thu
                 blankLedArray[10] = colorConvert('today');
                 break;
-            case 6: // sat
+            case 5: // fri
                 blankLedArray[13] = colorConvert('today');
                 break;
-            case 0: // sun
+            case 6: // sat
                 blankLedArray[14] = colorConvert('today');
+                break;
+            case 0: // sun
+                blankLedArray[17] = colorConvert('today');
                 break;
         }
 
@@ -144,7 +144,7 @@ module.exports = (context, req) => {
             });
         });
     }
-    
+
     const processStrava = async () => {
         const result = await getStravaDataPromise(startOfWeek.unix());
         context.log('strava api result', result);
