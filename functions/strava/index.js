@@ -19,8 +19,11 @@ module.exports = (context, req) => {
     });
 
     const today = dayjs(); //.add(2, 'hour') // utc convert?
-    const startOfWeek = today.startOf('week').subtract(1, 'day'); // i made my start of the week monday
-
+    let startOfWeek = today.startOf('week').subtract(1, 'day'); // i made my start of the week monday
+    if(today.day()===0){ // sunday issues
+        startOfWeek = today.subtract(7, 'day');
+    }
+    context.log('start of week', startOfWeek);
     const colorConvert = (name) => {
         switch (name) {
             case 'run':
@@ -51,6 +54,16 @@ module.exports = (context, req) => {
 
     const dayArrayToLeds = (array) => {
         // for the running values
+        context.log('dat to leds', array, today.day());
+        if(array.length===0){
+            // if no data from strava ie u havent been running
+            array = [
+                {
+                    color: 'bad',
+                    day: today.day()
+                }
+            ]
+        }
         array.map((y) => {
             if(today.day() >= y.day && y.day !== 0 || today.day() === 0){ // sort out sunday issue being 0
                 switch (y.day) {
