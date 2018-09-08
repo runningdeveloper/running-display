@@ -19,7 +19,7 @@ module.exports = (context, req) => {
     });
 
     const today = dayjs(); //.add(2, 'hour') // utc convert?
-    let startOfWeek = today.startOf('week').subtract(1, 'day'); // i made my start of the week monday
+    let startOfWeek = today.startOf('week').add(1, 'day'); // i made my start of the week monday
     if(today.day()===0){ // sunday issues
         startOfWeek = today.subtract(7, 'day');
     }
