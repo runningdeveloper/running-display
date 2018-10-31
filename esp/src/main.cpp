@@ -23,7 +23,10 @@ unsigned long lastDebounceTime = 0;
 unsigned long debounceDelay = 50; 
 
 // init led array so they are all blank (black)
-int leds[18][3] = {
+int leds[21][3] = {
+  {0,0,0},
+  {0,0,0},
+  {0,0,0},
   {0,0,0},
   {0,0,0},
   {0,0,0},
@@ -127,7 +130,7 @@ IOTHUBMESSAGE_DISPOSITION_RESULT receiveMessageCallback(IOTHUB_MESSAGE_HANDLE me
         strncpy(temp, (const char *)buffer, size);
         temp[size] = '\0';
 
-        const size_t bufferSize = 18*JSON_ARRAY_SIZE(3) + JSON_ARRAY_SIZE(18) + JSON_OBJECT_SIZE(1) + 170;
+        const size_t bufferSize = 21*JSON_ARRAY_SIZE(3) + JSON_ARRAY_SIZE(21) + JSON_OBJECT_SIZE(1) + 170;
         StaticJsonBuffer<bufferSize> jsonBuffer;
 
         JsonObject& root = jsonBuffer.parseObject(temp);
@@ -227,7 +230,7 @@ void loop()
 
   IoTHubClient_LL_DoWork(iotHubClientHandle);
 
-  for(int i=0;i<18;i++){
+  for(int i=0;i<21;i++){
     pixels.setPixelColor(i, pixels.Color(leds[i][0],leds[i][1],leds[i][2]));
     // for testing
     // pixels.setPixelColor(i, pixels.Color(0,150,0));

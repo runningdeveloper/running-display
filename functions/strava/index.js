@@ -46,7 +46,7 @@ module.exports = (context, req) => {
         }
     }
     const runningLeds = _.times(4, () => colorConvert('run')); // 4 leds run color
-    const blankLedArray = _.concat(runningLeds, _.times(14, () => colorConvert('blank')));
+    const blankLedArray = _.concat(runningLeds, _.times(17, () => colorConvert('blank')));
 
     const daysArray = _.times(7, (i) => {
         return {color: 'bad', day: i};
@@ -57,36 +57,39 @@ module.exports = (context, req) => {
         context.log('dat to leds', array, today.day());
         if(array.length===0){
             // if no data from strava ie u havent been running
-            array = [
-                {
-                    color: 'bad',
-                    day: today.day()
-                }
-            ]
+            for(let i=0; i<=today.day(); i++){
+                array.push(
+                    {
+                        color: 'bad',
+                        day: i
+                    }
+                );
+            }
+            context.log('after for', array);
         }
         array.map((y) => {
             if(today.day() >= y.day && y.day !== 0 || today.day() === 0){ // sort out sunday issue being 0
                 switch (y.day) {
                     case 1: // mon
-                        blankLedArray[4] = colorConvert(y.color);
-                        break;
-                    case 2: // tue
                         blankLedArray[7] = colorConvert(y.color);
                         break;
-                    case 3: // wed
-                        blankLedArray[8] = colorConvert(y.color);
+                    case 2: // tue
+                        blankLedArray[10] = colorConvert(y.color);
                         break;
-                    case 4: // thu
+                    case 3: // wed
                         blankLedArray[11] = colorConvert(y.color);
                         break;
-                    case 5: // fri
-                        blankLedArray[12] = colorConvert(y.color);
+                    case 4: // thu
+                        blankLedArray[14] = colorConvert(y.color);
                         break;
-                    case 6: // sat
+                    case 5: // fri
                         blankLedArray[15] = colorConvert(y.color);
                         break;
+                    case 6: // sat
+                        blankLedArray[18] = colorConvert(y.color);
+                        break;
                     case 0: // sun
-                        blankLedArray[16] = colorConvert(y.color);
+                        blankLedArray[19] = colorConvert(y.color);
                         break;
                 }
             }
@@ -94,25 +97,25 @@ module.exports = (context, req) => {
         // for today indicator
         switch (today.day()) {
             case 1: // mon
-                blankLedArray[5] = colorConvert('today');
+                blankLedArray[8] = colorConvert('today');
                 break;
             case 2: // tue
-                blankLedArray[6] = colorConvert('today');
-                break;
-            case 3: // wed
                 blankLedArray[9] = colorConvert('today');
                 break;
-            case 4: // thu
-                blankLedArray[10] = colorConvert('today');
+            case 3: // wed
+                blankLedArray[12] = colorConvert('today');
                 break;
-            case 5: // fri
+            case 4: // thu
                 blankLedArray[13] = colorConvert('today');
                 break;
+            case 5: // fri
+                blankLedArray[16] = colorConvert('today');
+                break;
             case 6: // sat
-                blankLedArray[14] = colorConvert('today');
+                blankLedArray[17] = colorConvert('today');
                 break;
             case 0: // sun
-                blankLedArray[17] = colorConvert('today');
+                blankLedArray[20] = colorConvert('today');
                 break;
         }
 
